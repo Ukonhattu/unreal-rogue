@@ -42,7 +42,7 @@ void Aunreal_roguePlayerController::SetupInputComponent()
 {
 	// set up gameplay key bindings
 	Super::SetupInputComponent();
-
+	/*
 	InputComponent->BindAction("SetDestination", IE_Pressed, this, &Aunreal_roguePlayerController::OnSetDestinationPressed);
 	InputComponent->BindAction("SetDestination", IE_Released, this, &Aunreal_roguePlayerController::OnSetDestinationReleased);
 
@@ -51,7 +51,7 @@ void Aunreal_roguePlayerController::SetupInputComponent()
 	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &Aunreal_roguePlayerController::MoveToTouchLocation);
 
 	InputComponent->BindAction("ResetVR", IE_Pressed, this, &Aunreal_roguePlayerController::OnResetVR);
-
+	*/
 	// wasd movement
 
 	InputComponent->BindAxis("MoveForward", this, &Aunreal_roguePlayerController::MoveForwad);
@@ -81,11 +81,12 @@ void Aunreal_roguePlayerController::MoveToMouseCursor()
 		FHitResult Hit;
 		GetHitResultUnderCursor(ECC_Visibility, false, Hit);
 
+		/*
 		if (Hit.bBlockingHit)
 		{
 			// We hit something, move there
 			SetNewMoveDestination(Hit.ImpactPoint);
-		}
+		}*/
 	}
 }
 
