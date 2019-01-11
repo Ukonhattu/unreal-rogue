@@ -34,8 +34,7 @@ void Aunreal_roguePlayerController::RotateToMouse()
 		if (MyPawn->GetCursorToWorld()) {
 			FVector Direction =  MyPawn->GetCursorToWorld()->GetComponentLocation() - MyPawn->GetActorLocation();
 			Direction = FVector(Direction.X, Direction.Y, 0);
-			FRotator Rot = FRotationMatrix::MakeFromX(Direction).Rotator();
-			MyPawn->SetActorRotation(Rot);
+			MyPawn->SetActorRotation(FQuat::FindBetween(FVector::ForwardVector, Direction));
 		}
 
 	}
