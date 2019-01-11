@@ -28,8 +28,7 @@ public:
 	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
 
 
-	UPROPERTY(BlueprintReadWrite)
-	TSubclassOf<class AActor> RogueProjectileClass;
+
 
 private:
 	/** Top down camera */

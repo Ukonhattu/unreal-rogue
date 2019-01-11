@@ -12,6 +12,7 @@
 #include "Materials/Material.h"
 #include "Engine/World.h"
 #include "Engine/GameEngine.h"
+#include "RogueProjectile.h"
 
 Aunreal_rogueCharacter::Aunreal_rogueCharacter()
 {
@@ -58,8 +59,7 @@ Aunreal_rogueCharacter::Aunreal_rogueCharacter()
 	PrimaryActorTick.bStartWithTickEnabled = true;
 
 	//Projectile
-	static ConstructorHelpers::FObjectFinder<UClass> RogueProjectileClassFinder(TEXT("Blueprint'/Game/TopDownCPP/Blueprints/rogueProjectile.RogueProjectile_C''"));
-	RogueProjectileClass = RogueProjectileClassFinder.Object;
+
 }
 
 void Aunreal_rogueCharacter::Tick(float DeltaSeconds)
@@ -105,7 +105,7 @@ void Aunreal_rogueCharacter::FireWeapon()
 	FRotator rotator;
 
 	FVector spawnLocation = this->GetActorLocation();
-	GetWorld()->SpawnActor<AActor>(RogueProjectileClass, spawnLocation, rotator, spawnParams);
+	GetWorld()->SpawnActor<ARogueProjectile>(spawnLocation, rotator, spawnParams);
 		
 }
 
