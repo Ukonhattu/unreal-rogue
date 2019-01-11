@@ -56,6 +56,10 @@ Aunreal_rogueCharacter::Aunreal_rogueCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+
+	//Projectile
+	static ConstructorHelpers::FObjectFinder<UClass> RogueProjectileClassFinder(TEXT("Blueprint'/Game/TopDownCPP/Blueprints/rogueProjectile.RogueProjectile_C''"));
+	RogueProjectileClass = RogueProjectileClassFinder.Object;
 }
 
 void Aunreal_rogueCharacter::Tick(float DeltaSeconds)
@@ -94,6 +98,15 @@ void Aunreal_rogueCharacter::FireWeapon()
 {
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Fire!"));
+
+	FActorSpawnParameters spawnParams;
+	spawnParams.Owner = this;
+	
+	FRotator rotator;
+
+	FVector spawnLocation = this->GetActorLocation();
+	GetWorld()->SpawnActor<AActor>(RogueProjectileClass, spawnLocation, rotator, spawnParams);
+		
 }
 
 
