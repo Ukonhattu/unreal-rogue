@@ -17,6 +17,7 @@ public:
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
 
+	void FireWeapon();
 
 
 	/** Returns TopDownCameraComponent subobject **/

@@ -41,6 +41,14 @@ void Aunreal_roguePlayerController::RotateToMouse()
 
 }
 
+void Aunreal_roguePlayerController::FireWeapon()
+{
+	if (Aunreal_rogueCharacter* MyPawn = Cast<Aunreal_rogueCharacter>(GetPawn())) {
+		MyPawn->FireWeapon();
+	}
+}
+
+
 void Aunreal_roguePlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
@@ -68,10 +76,14 @@ void Aunreal_roguePlayerController::SetupInputComponent()
 
 	InputComponent->BindAction("ResetVR", IE_Pressed, this, &Aunreal_roguePlayerController::OnResetVR);
 	*/
+
 	// wasd movement
 
 	InputComponent->BindAxis("MoveForward", this, &Aunreal_roguePlayerController::MoveForwad);
 	InputComponent->BindAxis("MoveRight", this, &Aunreal_roguePlayerController::MoveRight);
+
+	// Fire weapon
+	InputComponent->BindAction("Fire", IE_Pressed, this, &Aunreal_roguePlayerController::FireWeapon);
 }
 
 void Aunreal_roguePlayerController::OnResetVR()

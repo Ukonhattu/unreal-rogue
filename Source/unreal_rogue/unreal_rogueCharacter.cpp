@@ -11,6 +11,7 @@
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Materials/Material.h"
 #include "Engine/World.h"
+#include "Engine/GameEngine.h"
 
 Aunreal_rogueCharacter::Aunreal_rogueCharacter()
 {
@@ -87,6 +88,12 @@ void Aunreal_rogueCharacter::Tick(float DeltaSeconds)
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
 	}
+}
+
+void Aunreal_rogueCharacter::FireWeapon()
+{
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Fire!"));
 }
 
 

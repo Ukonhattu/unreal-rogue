@@ -43,6 +43,9 @@ protected:
 	void MoveRight(float amount);
 
 	void RotateToMouse();
+
+	void FireWeapon();
+
 };
 
 
