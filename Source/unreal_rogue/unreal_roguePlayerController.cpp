@@ -31,11 +31,11 @@ void Aunreal_roguePlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
-	// keep updating the destination every tick while desired
+	/* keep updating the destination every tick while desired
 	if (bMoveToMouseCursor)
 	{
 		MoveToMouseCursor();
-	}
+	}*/
 }
 
 void Aunreal_roguePlayerController::SetupInputComponent()
@@ -81,12 +81,12 @@ void Aunreal_roguePlayerController::MoveToMouseCursor()
 		FHitResult Hit;
 		GetHitResultUnderCursor(ECC_Visibility, false, Hit);
 
-		/*
+
 		if (Hit.bBlockingHit)
 		{
 			// We hit something, move there
 			SetNewMoveDestination(Hit.ImpactPoint);
-		}*/
+		}
 	}
 }
 
