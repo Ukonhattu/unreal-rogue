@@ -13,6 +13,20 @@ Aunreal_roguePlayerController::Aunreal_roguePlayerController()
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
 }
 
+void Aunreal_roguePlayerController::MoveForwad(float amount)
+{
+	if (Aunreal_rogueCharacter* MyPawn = Cast<Aunreal_rogueCharacter>(GetPawn())) {
+		MyPawn->AddMovementInput(FVector(1.0f, 0.0f, 0.0f), amount);
+	}
+}
+
+void Aunreal_roguePlayerController::MoveRight(float amount)
+{
+	if (Aunreal_rogueCharacter* MyPawn = Cast<Aunreal_rogueCharacter>(GetPawn())) {
+		MyPawn->AddMovementInput(FVector(0.0f, 1.0f, 0.0f), amount);
+	}
+}
+
 void Aunreal_roguePlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
@@ -37,6 +51,11 @@ void Aunreal_roguePlayerController::SetupInputComponent()
 	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &Aunreal_roguePlayerController::MoveToTouchLocation);
 
 	InputComponent->BindAction("ResetVR", IE_Pressed, this, &Aunreal_roguePlayerController::OnResetVR);
+
+	// wasd movement
+
+	InputComponent->BindAxis("MoveForward", this, &Aunreal_roguePlayerController::MoveForwad);
+	InputComponent->BindAxis("MoveRight", this, &Aunreal_roguePlayerController::MoveRight);
 }
 
 void Aunreal_roguePlayerController::OnResetVR()

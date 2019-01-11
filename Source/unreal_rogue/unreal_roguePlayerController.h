@@ -13,6 +13,8 @@ class Aunreal_roguePlayerController : public APlayerController
 
 public:
 	Aunreal_roguePlayerController();
+	void MoveForwad(float amount);
+	void MoveRight(float amount);
 
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
