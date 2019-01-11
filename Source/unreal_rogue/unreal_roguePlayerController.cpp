@@ -27,9 +27,19 @@ void Aunreal_roguePlayerController::MoveRight(float amount)
 	}
 }
 
+void Aunreal_roguePlayerController::RotateToMouse()
+{
+	if (Aunreal_rogueCharacter* MyPawn = Cast<Aunreal_rogueCharacter>(GetPawn())) {
+
+	}
+
+}
+
 void Aunreal_roguePlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
+
+	RotateToMouse();
 
 	/* keep updating the destination every tick while desired
 	if (bMoveToMouseCursor)

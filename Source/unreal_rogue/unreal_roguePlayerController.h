@@ -41,6 +41,8 @@ protected:
 
 	void MoveForwad(float amount);
 	void MoveRight(float amount);
+
+	void RotateToMouse();
 };
 
 
