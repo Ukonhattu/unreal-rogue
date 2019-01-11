@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "RogueProjectile.h"
 #include "unreal_rogueCharacter.generated.h"
+
 
 UCLASS(Blueprintable)
 class Aunreal_rogueCharacter : public ACharacter
@@ -17,6 +19,7 @@ public:
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
 
+	UFUNCTION()
 	void FireWeapon();
 
 
@@ -26,6 +29,10 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns CursorToWorld subobject **/
 	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
+
+	// Projectile class to spawn.
+	UPROPERTY(EditDefaultsOnly, Category = Projectile)
+	TSubclassOf<class ARogueProjectile> ProjectileClass;
 
 
 

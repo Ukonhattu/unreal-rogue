@@ -96,16 +96,24 @@ void Aunreal_rogueCharacter::Tick(float DeltaSeconds)
 
 void Aunreal_rogueCharacter::FireWeapon()
 {
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Fire!"));
+	if (ProjectileClass) {
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Fire!"));
 
-	FActorSpawnParameters spawnParams;
-	spawnParams.Owner = this;
-	
-	FRotator rotator;
+		FActorSpawnParameters spawnParams;
+		spawnParams.Owner = this;
 
-	FVector spawnLocation = this->GetActorLocation();
-	GetWorld()->SpawnActor<ARogueProjectile>(spawnLocation, rotator, spawnParams);
+		FRotator rotator;
+
+		FVector spawnLocation = this->GetActorLocation();
+		ARogueProjectile* projectile = GetWorld()->SpawnActor<ARogueProjectile>(ProjectileClass, spawnLocation, rotator, spawnParams);
+
+		if (projectile) {
+			FVector LaunchDirection = this->GetActorForwardVector();
+			projectile->FireInDirection(LaunchDirection);
+		}
+	}
+
 		
 }
 
