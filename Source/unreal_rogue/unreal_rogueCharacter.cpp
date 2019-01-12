@@ -104,7 +104,7 @@ void Aunreal_rogueCharacter::FireWeapon()
 		SpawnParams.Owner = this;
 		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-		FRotator rotator = FRotator(0,0,0);;
+		FRotator rotator = FRotator(0,0,90);
 
 		FVector spawnLocation = this->GetActorLocation();
 		ARogueProjectile* projectile = GetWorld()->SpawnActor<ARogueProjectile>(ProjectileClass, spawnLocation, rotator, SpawnParams);
