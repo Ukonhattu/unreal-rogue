@@ -100,17 +100,20 @@ void Aunreal_rogueCharacter::FireWeapon()
 		if (GEngine)
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Fire!"));
 
-		FActorSpawnParameters spawnParams;
-		spawnParams.Owner = this;
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-		FRotator rotator;
+		FRotator rotator = FRotator(0,0,0);;
 
 		FVector spawnLocation = this->GetActorLocation();
-		ARogueProjectile* projectile = GetWorld()->SpawnActor<ARogueProjectile>(ProjectileClass, spawnLocation, rotator, spawnParams);
+		ARogueProjectile* projectile = GetWorld()->SpawnActor<ARogueProjectile>(ProjectileClass, spawnLocation, rotator, SpawnParams);
 
 		if (projectile) {
 			FVector LaunchDirection = this->GetActorForwardVector();
 			projectile->FireInDirection(LaunchDirection);
+			if (GEngine)
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Projectile exists"));
 		}
 	}
 
