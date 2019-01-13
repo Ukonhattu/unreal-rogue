@@ -8,10 +8,11 @@ ARogueProjectile::ARogueProjectile() {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// Use a sphere as a simple collision representation.
+	// Use sphere for collision
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
-	// Set the sphere's collision radius.
 	CollisionComponent->InitSphereRadius(15.0f);
+	CollisionComponent->OnComponentHit.AddDynamic(this, &ARogueProjectile::OnComponentHit);
+
 	// Set the root component to be the collision component.
 	RootComponent = CollisionComponent;
 
@@ -20,7 +21,6 @@ ARogueProjectile::ARogueProjectile() {
 	TriggerComponent->InitSphereRadius(15.0f);
 	TriggerComponent->SetupAttachment(RootComponent);
 	TriggerComponent->OnComponentBeginOverlap.AddDynamic(this, &ARogueProjectile::OnOverlapBegin);
-	
 
 	// Use this component to drive this projectile's movement.
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
@@ -54,7 +54,16 @@ void ARogueProjectile::FireInDirection(const FVector& ShootDirection) {
 void ARogueProjectile::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 	if (OtherActor && (OtherActor != this) && OtherComp) {
 		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Projectile destroyed"));
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Bullet Overlay"));
+		}
+		Destroy();
+	}
+}
+
+void ARogueProjectile::OnComponentHit(class UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
+	if (OtherActor && (OtherActor != this) && OtherComp) {
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Bullet collide"));
 		}
 		Destroy();
 	}
