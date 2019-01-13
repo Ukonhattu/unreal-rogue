@@ -12,6 +12,11 @@ ARogueProjectile::ARogueProjectile() {
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
 	// Set the sphere's collision radius.
 	CollisionComponent->InitSphereRadius(15.0f);
+	CollisionComponent->SetSimulatePhysics(true);
+	CollisionComponent->SetNotifyRigidBodyCollision(true);
+	//CollisionComponent->BodyInstance.SetCollisionProfileName("PlayerProjectile"); <-- this was useless with overlay, probably here also
+	CollisionComponent->OnComponentHit.AddDynamic(this, &ARogueProjectile::OnComponentHit);
+
 	// Set the root component to be the collision component.
 	RootComponent = CollisionComponent;
 
@@ -55,6 +60,15 @@ void ARogueProjectile::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp,
 	if (OtherActor && (OtherActor != this) && OtherComp) {
 		if (GEngine) {
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Projectile destroyed"));
+		}
+		Destroy();
+	}
+}
+
+void ARogueProjectile::OnComponentHit(class UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
+	if (OtherActor && (OtherActor != this) && OtherComp) {
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("HIT"));
 		}
 		Destroy();
 	}
