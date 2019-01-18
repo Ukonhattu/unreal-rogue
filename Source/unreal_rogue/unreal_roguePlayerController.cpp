@@ -48,6 +48,16 @@ void Aunreal_roguePlayerController::FireWeapon()
 	}
 }
 
+void Aunreal_roguePlayerController::StartAttacking()
+{
+	this->bIsAttacking = true;
+}
+
+void Aunreal_roguePlayerController::StopAttacking()
+{
+	this->bIsAttacking = false;
+}
+
 
 void Aunreal_roguePlayerController::PlayerTick(float DeltaTime)
 {
@@ -84,6 +94,10 @@ void Aunreal_roguePlayerController::SetupInputComponent()
 
 	// Fire weapon
 	InputComponent->BindAction("Fire", IE_Pressed, this, &Aunreal_roguePlayerController::FireWeapon);
+
+	//Attack with sword
+	InputComponent->BindAction("Attack", IE_Pressed, this, &Aunreal_roguePlayerController::StartAttacking);
+	InputComponent->BindAction("Attack", IE_Released, this, &Aunreal_roguePlayerController::StopAttacking);
 }
 
 void Aunreal_roguePlayerController::OnResetVR()

@@ -14,6 +14,9 @@ class Aunreal_roguePlayerController : public APlayerController
 public:
 	Aunreal_roguePlayerController();
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = PlayerCombat)
+	bool bIsAttacking;
+
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
@@ -46,6 +49,9 @@ protected:
 
 
 	void FireWeapon();
+
+	void StartAttacking();
+	void StopAttacking();
 
 };
 
