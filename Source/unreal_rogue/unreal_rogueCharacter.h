@@ -5,7 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "RogueProjectile.h"
+#include "Weapon.h"
 #include "unreal_rogueCharacter.generated.h"
+
 
 
 UCLASS(Blueprintable)
@@ -23,6 +25,7 @@ public:
 	void FireWeapon();
 
 
+
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
 	/** Returns CameraBoom subobject **/
@@ -33,6 +36,10 @@ public:
 	// Projectile class to spawn.
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	TSubclassOf<class ARogueProjectile> ProjectileClass;
+
+	//Weapon to use
+	UPROPERTY(EditDefaultsOnly, Category = Weapon)
+	TSubclassOf<class AWeapon> WeaponClass;
 
 
 
@@ -49,6 +56,8 @@ private:
 	/** A decal that projects to the cursor location. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UDecalComponent* CursorToWorld;
+
+	virtual void BeginPlay();
 
 };
 

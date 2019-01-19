@@ -13,6 +13,7 @@
 #include "Engine/World.h"
 #include "Engine/GameEngine.h"
 #include "RogueProjectile.h"
+#include "Weapon.h"
 
 Aunreal_rogueCharacter::Aunreal_rogueCharacter()
 {
@@ -118,6 +119,21 @@ void Aunreal_rogueCharacter::FireWeapon()
 	}
 
 		
+}
+
+void Aunreal_rogueCharacter::BeginPlay()
+{
+	// Call the base class  
+	Super::BeginPlay();
+
+	/*//Weapon
+	FName fnWeaponSocket = TEXT("SwordLocation");
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	AWeapon* weapon = GetWorld()->SpawnActor<AWeapon>(WeaponClass, SpawnParams);
+	weapon->AttachToActor(this, FAttachmentTransformRules::KeepRelativeTransform, fnWeaponSocket);*/
+
 }
 
 
