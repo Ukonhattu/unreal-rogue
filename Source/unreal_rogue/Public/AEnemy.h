@@ -4,16 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/BoxComponent.h"
-#include "DummyEnemy.generated.h"
+#include "AEnemy.generated.h"
 
 UCLASS()
-class UNREAL_ROGUE_API ADummyEnemy : public AActor {
+class UNREAL_ROGUE_API AEnemy : public AActor {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	ADummyEnemy();
+	AEnemy();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,8 +22,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Collision component for the class
-	UPROPERTY(VisibleAnywhere)
-	class UBoxComponent* CollisionComponent;
+	// Damage taking
+	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;
+
+	UPROPERTY(EditAnywhere)
+	float Health;
 
 };

@@ -56,7 +56,8 @@ void ARogueProjectile::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp,
 		if (GEngine) {
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Bullet Overlay"));
 		}
-		Destroy();
+		OtherActor->TakeDamage(5.f, FDamageEvent(), nullptr, this);
+		//Destroy();
 	}
 }
 
